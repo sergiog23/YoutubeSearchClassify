@@ -66,7 +66,7 @@ class YoutubeSearch:
                 tokens.append(t)
         for term in tokens:
             if term not in query_weight:
-                tf = tokens.count(terms)/len(tokens)
+                tf = tokens.count(term)/len(tokens)
                 query_weight[term] = tf
         ans = {}
         for term in query_weight:
