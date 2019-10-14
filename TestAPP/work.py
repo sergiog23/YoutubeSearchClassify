@@ -26,7 +26,7 @@ class YoutubeSearch:
             tok = regExToken.tokenize(df['title'][i])
             tok = tok + regExToken.tokenize(df['channel_title'][i])
             tok = tok + regExToken.tokenize(df['description'][i])
-
+            print(tok)
             stemmedTokens = []
             for t in tok:
                 tok = tok.lower()
@@ -34,7 +34,7 @@ class YoutubeSearch:
                     tok = stemmer.stem(tok)
                     stemmedTokens.append(tok)
             processedDoc.append(stemmedTokens)
-
+  
         for document in processedDoc:
             weightVectorr = {}
             for term in document:
@@ -55,7 +55,7 @@ class YoutubeSearch:
                 postList[t].append([i, document[t]])
                 postList[t] = sorted(postList[t], key=lambda x: x[1], reverse=True)
         print(processedDoc)
-
+        
     def search(self, query):
         q = self.regExToken.tokenize(query)
         tokens = []
@@ -80,4 +80,4 @@ class YoutubeSearch:
         ans = sorted(ans, key=ans.get, reverse=True)
         print(ans)
         return ans
-
+    

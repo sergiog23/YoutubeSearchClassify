@@ -2,6 +2,7 @@
 
 # Function to compute Term frequency
 # function logic from 
+
 def computeTF( wordDict, bow)
     tfDict = {}
     bowCount = len(bow)
