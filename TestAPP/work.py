@@ -54,6 +54,7 @@ class YoutubeSearch:
                     postList[t] = []
                 postList[t].append([i, document[t]])
                 postList[t] = sorted(postList[t], key=lambda x: x[1], reverse=True)
+        print(processedDoc)
 
     def search(self, query):
         q = self.regExToken.tokenize(query)
@@ -79,3 +80,4 @@ class YoutubeSearch:
         ans = sorted(ans, key=ans.get, reverse=True)
         print(ans)
         return ans
+
