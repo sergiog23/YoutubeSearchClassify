@@ -34,7 +34,7 @@ class YoutubeSearch:
                     tok = stemmer.stem(tok)
                     stemmedTokens.append(tok)
             processedDoc.append(stemmedTokens)
-  
+        print(processedDoc)
         for document in processedDoc:
             weightVectorr = {}
             for term in document:
