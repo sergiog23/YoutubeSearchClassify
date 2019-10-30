@@ -11,7 +11,6 @@ import re
 
 class YoutubeVid:
     allData = pd.read_csv('USVideos.csv')
-    stopWords = stopwords.words('english')
     regExToken = RegexpTokenizer(r'[a-zA-Z]+')
     index = allData.index
     columns = allData.columns
@@ -21,7 +20,6 @@ class YoutubeVid:
     dictionary = []
     lower_tok = []
     Vector = []
-    tok =allData['title']
     term = []
     pList = {}
     #print(tok)
@@ -44,23 +42,21 @@ class YoutubeVid:
                 if token not in dictionary:
                     dictionary.append(token)
             processedDoc.append(lower_tok)
-
+           # print(dictionary)
+        DF = sum( 1 for document in processedDoc if token in document)
         for document in processedDoc:
             weight_vector = {}
             token = []
-            documentFrequency = 0
             for token in document:
                 if token not in weight_vector:
                     #calculate term frequency
                     termFrequency = document.count(token)/len(document)
-                    documentFrequency = 10
                     lengthOfFinalDoc = len(processedDoc)
-                    idf = math.log(lengthOfFinalDoc/documentFrequency)
+                    idf = math.log(lengthOfFinalDoc/DF+1)
                     curWeight = termFrequency*idf
                     weight_vector[token] = curWeight
-
+                    #print(weight_vector)
             Vector.append(weight_vector)
-        #print(Vector)
         
         for i in range(len(Vector)):
             document = Vector[i]
@@ -69,6 +65,7 @@ class YoutubeVid:
                     pList[token]= [] 
                 pList[token].append([i, document[token]])
                 pList[token] = sorted(pList[token], key=lambda x: x[1],reverse=True)
+            #print(pList)
 
     def search(self,query):
         q= self.regExToken.tokenize(query)
@@ -91,12 +88,10 @@ class YoutubeVid:
                     if document not in tSum:
                         tSum[document] = 0
                     tSum[document] += post[1] * qWeight[term]
-        tSum = sorted(tSum, key=tSum.get,reverse =True)
+       # tSum = sorted(tSum, key=tSum.get,reverse =True)
         print(tSum)
         return tSum
-
-
-    
-            
+ls = YoutubeVid()
+ls.search('yes i am')
 
 
