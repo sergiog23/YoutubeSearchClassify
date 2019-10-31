@@ -22,9 +22,9 @@ class YoutubeVid:
     Vector = []
     term = []
     pList = {}
-    #print(tok)
+    print(tok)
     
-    #print(range(len(tok)))
+    print(range(len(tok)))
     def __init__(self):
         allData = self.allData
         regExToken = self.regExToken
@@ -42,7 +42,7 @@ class YoutubeVid:
                 if token not in dictionary:
                     dictionary.append(token)
             processedDoc.append(lower_tok)
-           # print(dictionary)
+            print(dictionary)
         DF = sum( 1 for document in processedDoc if token in document)
         for document in processedDoc:
             weight_vector = {}
@@ -55,7 +55,7 @@ class YoutubeVid:
                     idf = math.log(lengthOfFinalDoc/DF+1)
                     curWeight = termFrequency*idf
                     weight_vector[token] = curWeight
-                    #print(weight_vector)
+                    print(weight_vector)
             Vector.append(weight_vector)
         
         for i in range(len(Vector)):
@@ -65,7 +65,7 @@ class YoutubeVid:
                     pList[token]= [] 
                 pList[token].append([i, document[token]])
                 pList[token] = sorted(pList[token], key=lambda x: x[1],reverse=True)
-            #print(pList)
+            print(pList)
 
     def search(self,query):
         q= self.regExToken.tokenize(query)
@@ -91,7 +91,7 @@ class YoutubeVid:
        # tSum = sorted(tSum, key=tSum.get,reverse =True)
         print(tSum)
         return tSum
-ls = YoutubeVid()
-ls.search('yes i am')
+#ls = YoutubeVid()
+#ls.search('yes i am')
 
 
