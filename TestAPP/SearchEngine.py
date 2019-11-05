@@ -30,13 +30,14 @@ stop_words = set(stopwords.words('english'))
 for i in range(10):
     # create a list that tokenized the titles of all the records 
     tokenized = regExToken.tokenize(allData['title'][i])
+    tokenized = tokenized + regExToken.tokenize(allData['description'][i])
+    print(tokenized)
     for token in tokenized:
         token = token.lower()
         lower_tok.append(token)
         if token not in dictionary:
             dictionary.append(token)
     processedDoc.append(lower_tok)
-
 
 
 for document in processedDoc:
@@ -48,11 +49,13 @@ for document in processedDoc:
             termFrequency = document.count(token)/len(document)
             lengthOfFinalDoc = len(processedDoc)
             DF = sum( 1 for document in processedDoc if token in document)
+            #print(DF)
             idf = math.log(lengthOfFinalDoc/DF+1)
             curWeight = termFrequency*idf
             weight_vector[token] = curWeight
             (weight_vector)
     Vector.append(weight_vector)
+   # print(Vector)
         
 for i in range(len(Vector)):
     document = Vector[i]
@@ -64,7 +67,7 @@ for i in range(len(Vector)):
             #print(pList)
 query = 'we are getting married married married'
 q= regExToken.tokenize(query)
-print(q)
+#print(q)
 tokens= []
 weight = {}
 ans = {}
@@ -74,7 +77,7 @@ for t in q:
      #   t = stem.stem(t)
     tokens.append(t)
 
-print(tokens)
+#print(tokens)
 for term in tokens:
     #print(term)
     if term not in weight:
