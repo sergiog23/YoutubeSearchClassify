@@ -18,11 +18,13 @@ tok = []
 tokenized = []
 dictionary = []
 curDoc = []
+fword = []
 
 stem= PorterStemmer()
 Vector = []
 term = []
 pList = {}
+lower_tok = []
 stop_words = set(stopwords.words('english'))
 
 
@@ -31,10 +33,18 @@ for i in range(100):
     curDoc = allData.iloc[i]['title']
     curDoc = curDoc+ allData.iloc[i]['description']
     tokenized = regExToken.tokenize(curDoc)
-        tokenized = tokenized.tolower()
+    
     for token in tokenized:
-        if token not in dictionary:
-            dictionary.append(token)
+        tokenized = token.lower()
+        if token not in stop_words:
+            token = stem.stem(token)
+            fword.append(token)
+
+            if token not in dictionary:
+                dictionary.append(token)
+                print(dictionary)
+    processedDoc.append(fword)
+    print(processedDoc)
 for document in tokenized:
     weight_vector = {}
 
@@ -42,6 +52,7 @@ for document in tokenized:
         if token not in weight_vector:
             TF = document.count(token)/len(document)
             DF = sum (1 for document in processedDoc if token in document)
+            #print(DF)
     
     
     
