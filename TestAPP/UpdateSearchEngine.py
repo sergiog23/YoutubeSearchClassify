@@ -29,30 +29,32 @@ stop_words = set(stopwords.words('english'))
 
 
 # We need to tokenize the data set and lower it 
-for i in range(100):
+for i in range(10):
     curDoc = allData.iloc[i]['title']
     curDoc = curDoc+ allData.iloc[i]['description']
     tokenized = regExToken.tokenize(curDoc)
-    
     for token in tokenized:
         tokenized = token.lower()
         if token not in stop_words:
             token = stem.stem(token)
             fword.append(token)
-
             if token not in dictionary:
                 dictionary.append(token)
-                print(dictionary)
+                #print(dictionary)
     processedDoc.append(fword)
-    print(processedDoc)
-for document in tokenized:
+
+for document in processedDoc:
+    
     weight_vector = {}
 
-    for token in document:
-        if token not in weight_vector:
-            TF = document.count(token)/len(document)
-            DF = sum (1 for document in processedDoc if token in document)
-            #print(DF)
+    for term in document:
+        if term not in weight_vector:
+            N = len(processedDoc)
+            TF = document.count(term)/len(document)
+            DF = sum (1 for document in processedDoc if term in document)
+            Weight = TF * math.log10(N/DF+1)
+    weight_vector.append(weight_vector)
+    
     
     
     
