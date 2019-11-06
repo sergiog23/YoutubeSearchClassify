@@ -21,7 +21,7 @@ def search():
     l = len(result)
     for i in range(l):
         documents.append(result[i])
-    print(result)
+    #print(result)
     title = list(yes.allData['title'][documents])
 
     return render_template('results.html',data= yes.allData, result = documents, title =title, search =True)

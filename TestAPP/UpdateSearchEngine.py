@@ -53,8 +53,21 @@ for document in processedDoc:
             TF = document.count(term)/len(document)
             DF = sum (1 for document in processedDoc if term in document)
             Weight = TF * math.log10(N/DF+1)
-    weight_vector.append(weight_vector)
-    
+    Vector.append(weight_vector)
+
+for i in range(10):
+    document = Vector[i]
+    print("nseo")
+    for token in document:
+        print("cuales")
+        if token not in pList:
+            pList[token] = []
+            print("no")
+        pList[token].append([i,document[token]])
+        pList[token] = sorted(pList[token],key = lambda x: x[1],reverse=True)
+        print(pList)
+        print("yes")
+
     
     
     
