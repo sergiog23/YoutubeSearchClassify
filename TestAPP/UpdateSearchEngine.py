@@ -29,7 +29,7 @@ class YoutubeSearchAlgorithm:
 		posting_lists = self.posting_lists
 		vocabulary = self.vocabulary
 
-		for i in range(169):
+		for i in range(165):
 			tokens = tokenizer.tokenize(vidInfo['title'][i])
 			tokens += tokenizer.tokenize(vidInfo['description'][i])
 
@@ -87,6 +87,5 @@ class YoutubeSearchAlgorithm:
 						ans[document] = 0
 					ans[document] += post[1] * query_weight[term]
 		ans = sorted(ans, key=ans.get, reverse=True)
-		print(ans)
 		return ans 
 	
