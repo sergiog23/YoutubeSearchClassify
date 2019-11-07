@@ -14,7 +14,7 @@ class YoutubeSearchAlgorithm:
     stops = stopwords.words('english')
     stemmer = PorterStemmer()
     tfi = []
-	tf_IDF =[]
+    tf_IDF = []
     final_document = []
     weight_vectors = []
     posting_lists = {}
@@ -30,7 +30,7 @@ class YoutubeSearchAlgorithm:
         posting_lists = self.posting_lists
         vocabulary = self.vocabulary
         tfi = self.tfi
-		tf_IDF = self.tf_IDF
+        tf_IDF = self.tf_IDF
 
         for i in range(165):
             tokens = tokenizer.tokenize(vidInfo['title'][i])
@@ -55,7 +55,7 @@ class YoutubeSearchAlgorithm:
                     n = len(final_document)
                     tfi.append(tf)
                     weight = tf * math.log10(n/df)
-					tf_IDF.append(weight)
+                    tf_IDF.append(weight)
 
                     weight_vector[term] = weight
             weight_vectors.append(weight_vector)
