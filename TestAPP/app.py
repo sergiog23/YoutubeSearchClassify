@@ -24,13 +24,18 @@ def search():
         documents.append(result[i])
     title = list(yes.vidInfo['title'][documents])
     description = list(yes.vidInfo['description'][documents])
+    tf =[]
+    idf = []
 
-    print(documents)
-    for i in range(1):
-        tf = list(yes.tfi)
+    for i in documents:
+        tfs = yes.tfi[i]
+        tf.append(tfs)
+        #print(tf)
+    for i in documents:
+        ids = yes.tf_IDF[i]
+        idf.append(ids)
 
-
-    return render_template('results.html', data=yes.vidInfo, result=documents, title=title, description=description,tf=tf, search=True)
+    return render_template('results.html', data=yes.vidInfo, result=documents, title=title, description=description,tf=tf,idf=idf, search=True)
 
 
 if (__name__ == '__main__'):
