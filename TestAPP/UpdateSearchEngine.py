@@ -1,77 +1,92 @@
 
-
 from nltk.tokenize import RegexpTokenizer
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
-import nltk
-import pandas as pd
 import math
+import pandas as pd
 import numpy
-import csv
-import re
 
 
-allData = pd.read_csv('USVideos.csv')
-regExToken = RegexpTokenizer(r'[a-zA-Z]+')
-processedDoc = [] 
-tok = []
-tokenized = []
-dictionary = []
-curDoc = []
-fword = []
+class YoutubeSearchAlgorithm:
 
-stem= PorterStemmer()
-Vector = []
-term = []
-pList = {}
-lower_tok = []
-stop_words = set(stopwords.words('english'))
+	vidInfo = pd.read_csv('USvideos.csv')
+	tokenizer = RegexpTokenizer(r'[a-zA-Z]+')
+	stops = stopwords.words('english')
+	stemmer = PorterStemmer()
+	total_words = []
+	final_document = []
+	weight_vectors = []
+	posting_lists = {}
+	vocabulary = []
 
+	def __init__(self):		
+		vidInfo = self.vidInfo
+		tokenizer = self.tokenizer
+		stops = self.stops
+		stemmer = self.stemmer
+		final_document = self.final_document
+		weight_vectors = self.weight_vectors
+		posting_lists = self.posting_lists
+		vocabulary = self.vocabulary
 
-# We need to tokenize the data set and lower it 
-for i in range(10):
-    curDoc = allData.iloc[i]['title']
-    curDoc = curDoc+ allData.iloc[i]['description']
-    tokenized = regExToken.tokenize(curDoc)
-    for token in tokenized:
-        tokenized = token.lower()
-        if token not in stop_words:
-            token = stem.stem(token)
-            fword.append(token)
-            if token not in dictionary:
-                dictionary.append(token)
-                #print(dictionary)
-    processedDoc.append(fword)
+		for i in range(169):
+			tokens = tokenizer.tokenize(vidInfo['title'][i])
+			tokens += tokenizer.tokenize(vidInfo['description'][i])
 
-for document in processedDoc:
-    
-    weight_vector = {}
+			final_tokens = []
+			for token in tokens: 
+				token = token.lower()
+				if token not in stops:
+					token = stemmer.stem(token)
+					final_tokens.append(token) 
+					if token not in vocabulary:
+						vocabulary.append(token)
+			final_document.append(final_tokens)
 
-    for term in document:
-        if term not in weight_vector:
-            N = len(processedDoc)
-            TF = document.count(term)/len(document)
-            DF = sum (1 for document in processedDoc if term in document)
-            Weight = TF * math.log10(N/DF+1)
-    Vector.append(weight_vector)
+		for document in final_document:
+		 	weight_vector = {}
+		 	for term in document:
+		 		if term not in weight_vector:		
+		 			tf = document.count(term)/len(document)
+		 			df = sum(1 for document in final_document if term in document)
+		 			n = len(final_document)
+		 			weight = tf * math.log10(n/df)
+		 			weight_vector[term] = weight
+		 	weight_vectors.append(weight_vector)
 
-for i in range(10):
-    document = Vector[i]
-    print("nseo")
-    for token in document:
-        print("cuales")
-        if token not in pList:
-            pList[token] = []
-            print("no")
-        pList[token].append([i,document[token]])
-        pList[token] = sorted(pList[token],key = lambda x: x[1],reverse=True)
-        print(pList)
-        print("yes")
+		 # construct posting lists
+		for i in range(len(weight_vectors)):
+		 	document = weight_vectors[i]
+		 	for token in document:
+		 		if token not in posting_lists:
+		 			posting_lists[token] = []
+		 		posting_lists[token].append([i, document[token]])
+		 		posting_lists[token] = sorted(posting_lists[token], key=lambda x: x[1], reverse=True)
 
-    
-    
-    
+	def search(self, query):
+		q = self.tokenizer.tokenize(query)
+		tokens = []
+		query_weight = {}
+		for t in q:
+			t = t.lower()
+			if t not in self.stops:
+				t = self.stemmer.stem(t) 
+				tokens.append(t)
 
-    
+		for term in tokens:
+			if term not in query_weight:
+				tf = tokens.count(term) / len(tokens)
+				query_weight[term] = tf
 
-
+		ans = {}
+		for term in query_weight:
+			if term in self.posting_lists:
+				for post in self.posting_lists[term]:
+					document = post[0]
+					if document not in ans:
+						ans[document] = 0
+					ans[document] += post[1] * query_weight[term]
+		ans = sorted(ans, key=ans.get, reverse=True)
+		print(ans)
+		return ans 
+	
