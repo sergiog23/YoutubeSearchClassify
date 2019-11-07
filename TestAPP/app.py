@@ -25,7 +25,12 @@ def search():
     title = list(yes.vidInfo['title'][documents])
     description = list(yes.vidInfo['description'][documents])
 
-    return render_template('results.html', data=yes.vidInfo, result=documents, title=title, description=description, tf=tf, search=True)
+    print(documents)
+    for i in range(1):
+        tf = list(yes.tfi)
+
+
+    return render_template('results.html', data=yes.vidInfo, result=documents, title=title, description=description,tf=tf, search=True)
 
 
 if (__name__ == '__main__'):
