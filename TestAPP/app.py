@@ -18,12 +18,16 @@ def search():
     documents = []
     userQuery = request.form.get('Search')
     result =  yes.search(userQuery)
+
     l = len(result)
     for i in range(l):
         documents.append(result[i])
     title = list(yes.vidInfo['title'][documents])
     description = list(yes.vidInfo['description'][documents])
-    return render_template('results.html',data= yes.vidInfo, result = documents,title = title,description=description, search =True)
+    weight = yes.weight_vectors
+
+    
+    return render_template('results.html',data= yes.vidInfo, result = documents,title = title,description=description,weight=weight ,search =True)
 
 if (__name__ == '__main__'):
     app.run(debug=True)

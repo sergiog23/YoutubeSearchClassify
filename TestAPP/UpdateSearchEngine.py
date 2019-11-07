@@ -18,6 +18,8 @@ class YoutubeSearchAlgorithm:
 	weight_vectors = []
 	posting_lists = {}
 	vocabulary = []
+    tf = []
+
 
 	def __init__(self):		
 		vidInfo = self.vidInfo
@@ -63,6 +65,7 @@ class YoutubeSearchAlgorithm:
 		 		posting_lists[token].append([i, document[token]])
 		 		posting_lists[token] = sorted(posting_lists[token], key=lambda x: x[1], reverse=True)
 
+                 
 	def search(self, query):
 		q = self.tokenizer.tokenize(query)
 		tokens = []
@@ -88,4 +91,8 @@ class YoutubeSearchAlgorithm:
 					ans[document] += post[1] * query_weight[term]
 		ans = sorted(ans, key=ans.get, reverse=True)
 		return ans 
+
+	
+
+         
 	
