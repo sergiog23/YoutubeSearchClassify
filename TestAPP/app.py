@@ -24,10 +24,10 @@ def search():
         documents.append(result[i])
     title = list(yes.vidInfo['title'][documents])
     description = list(yes.vidInfo['description'][documents])
-    weight = yes.weight_vectors
+    tf = yes.tf[1]
 
     
-    return render_template('results.html',data= yes.vidInfo, result = documents,title = title,description=description,weight=weight ,search =True)
+    return render_template('results.html',data= yes.vidInfo, result = documents,title = title,description=description,tf=tf ,search =True)
 
 if (__name__ == '__main__'):
     app.run(debug=True)

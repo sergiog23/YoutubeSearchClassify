@@ -13,13 +13,12 @@ class YoutubeSearchAlgorithm:
 	tokenizer = RegexpTokenizer(r'[a-zA-Z]+')
 	stops = stopwords.words('english')
 	stemmer = PorterStemmer()
-	total_words = []
+	tf_yes = []
 	final_document = []
 	weight_vectors = []
 	posting_lists = {}
 	vocabulary = []
-    tf = []
-
+	print(tf)
 
 	def __init__(self):		
 		vidInfo = self.vidInfo
@@ -50,6 +49,7 @@ class YoutubeSearchAlgorithm:
 		 	for term in document:
 		 		if term not in weight_vector:		
 		 			tf = document.count(term)/len(document)
+					tf_yes.append(tf)
 		 			df = sum(1 for document in final_document if term in document)
 		 			n = len(final_document)
 		 			weight = tf * math.log10(n/df)
@@ -70,6 +70,7 @@ class YoutubeSearchAlgorithm:
 		q = self.tokenizer.tokenize(query)
 		tokens = []
 		query_weight = {}
+		
 		for t in q:
 			t = t.lower()
 			if t not in self.stops:
