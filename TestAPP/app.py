@@ -35,7 +35,7 @@ def search():
         ids = yes.tf_IDF[i]
         idf.append(ids)
 
-    return render_template('results.html', data=yes.vidInfo,userQuery=userQuery, result=documents, title=title, description=description,tf=tf,idf=idf, search=True)
+    return render_template('results.html', data=yes.vidInfo,userQuery=userQuery, result=documents, title=title, description=description,l=l,tf=tf,idf=idf, search=True)
 
 
 if (__name__ == '__main__'):
