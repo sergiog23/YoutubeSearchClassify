@@ -8,12 +8,19 @@ In this phase I implemented Search using Tf-idf to score and rank the rows in th
 This webapp is currently hosted on pythonanywhere and can be used by going to the link at the top.  
 
 To download this project and run on local machine:
+
 1.Download zip file  
+
 2.Extract files
+
 3.On a terminal cd into YoutubeSearchClassify
+
 4.cd into YoutubeApp
-5.run python3 app.py
+
+5.run python3 app.py 
+
 6.This will run an give you a link to the webapp 
+
 7.Ctrl-c on the link to open web app.
 
 Note: You will need to have have some python libraries in order for you to runr:
