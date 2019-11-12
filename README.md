@@ -17,7 +17,7 @@ To download this project and run on local machine:
 6.This will run an give you a link to the webapp \
 7.Ctrl-c on the link to open web app.\
 Note: You will need to have have some python libraries in order for you to run:\
-NLTK, pandas,numpy,flask\\
+NLTK, pandas,numpy,flask
 
 Files:\
 **Search.py**: In this file we declare the class YoutubeVideoSearch where I implement Tf-idf and perform Search.\
