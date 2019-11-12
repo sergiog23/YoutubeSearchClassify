@@ -15,9 +15,19 @@ def index():
 
 @app.route('/', methods=['POST'])
 def search():
+    testing = []
     documents = []
     userQuery = request.form.get('Search')
     result = yes.search(userQuery)
+
+    terms = userQuery.split()
+
+    for x in terms:
+        testing = x.lower()
+        testing = re.sub(r'[^a-z0-9]'.'',testing,documents)
+    replace = re.compile(re.escape(term),re.IGNORECASE)
+    
+
 
     l = len(result)
     for i in range(l):
@@ -30,7 +40,6 @@ def search():
     for i in documents:
         tfs = yes.tfi[i]
         tf.append(tfs)
-        #print(tf)
     for i in documents:
         ids = yes.tf_IDF[i]
         idf.append(ids)
