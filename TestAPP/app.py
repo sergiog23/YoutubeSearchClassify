@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 from flask import request
-from UpdateSearchEngine import *
+from Search  import *
 
 app = Flask(__name__)
 
@@ -26,7 +26,7 @@ def search():
         testing = x.lower()
         testing = re.sub(r'[^a-z0-9]'.'',testing,documents)
     replace = re.compile(re.escape(term),re.IGNORECASE)
-    
+
 
 
     l = len(result)
