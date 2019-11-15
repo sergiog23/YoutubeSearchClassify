@@ -19,7 +19,7 @@ To download this project and run on local machine:
 4.cd into YoutubeApp\
 5.run python3 app.py \
 6.This will run an give you a link to the webapp \
-7.Ctrl-c on the link to open web app.\
+7.Ctrl-c on the link to open web app.
 
 Note: You will need to have have some python libraries in order for you to run:\
 NLTK, pandas,numpy,flask
