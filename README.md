@@ -6,6 +6,8 @@ Link to project: [YSC](http://sergiog23.pythonanywhere.com/)
 In this phase I implemented Search using Tf-idf to score and rank the rows in the document according to my query. 
 # Phase II Classifier
 In this phase I implemented a classifier using Naive Bayes to classify the description given by the user
+# Phase III Image recognition 
+In this phase I implemented an Image recognition using Jupyter notebook, Google Colab GPU, and Tensorflow.
 ## Instruction on how to run code
 This webapp is currently hosted on pythonanywhere and can be used by going to the link at the top.  
 
