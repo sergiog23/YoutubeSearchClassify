@@ -8,7 +8,7 @@ In this phase I implemented Search using Tf-idf to score and rank the rows in th
 In this phase I implemented a classifier using Naive Bayes to classify the description given by the user
 # Phase III Image recognition 
 In this phase I implemented an Image recognition using Jupyter notebook, Google Colab GPU, and Tensorflow.
-## Instruction on how to run code
+## Instructions on how to run code
 This webapp is currently hosted on pythonanywhere and can be used by going to the link at the top.  
 
 To download this project and run on local machine:
