@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template,request
 
 app = Flask(__name__)
 
@@ -6,9 +6,9 @@ app = Flask(__name__)
 def index():
     return render_template('home.html')
 
-@app.route('/search')
+@app.route('/', methods=['POST'])
 def search():
-    return render_template('search.html')
+    search = request.form.get('search')
 
 if (__name__ == '__main__'):
     app.run(debug=True)
