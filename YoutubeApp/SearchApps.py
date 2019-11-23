@@ -7,9 +7,9 @@ import pandas as pd
 import numpy
 
 
-class YoutubeSearchAlgorithm:
+class AppSearch:
 
-    vidInfo = pd.read_csv('YoutubeVideos.csv')
+    vidInfo = pd.read_csv('apps.csv')
     tokenizer = RegexpTokenizer(r'[a-zA-Z]+')
     stops = stopwords.words('english')
     stemmer = PorterStemmer()
@@ -33,8 +33,8 @@ class YoutubeSearchAlgorithm:
         tf_IDF = self.tf_IDF
 
         for i in range(165):
-            tokens = tokenizer.tokenize(vidInfo['title'][i])
-            tokens += tokenizer.tokenize(vidInfo['description'][i])
+            tokens = tokenizer.tokenize(vidInfo['track_name'][i])
+            tokens += tokenizer.tokenize(vidInfo['app_desc'][i])
 
             final_tokens = []
             for token in tokens:
@@ -59,6 +59,7 @@ class YoutubeSearchAlgorithm:
 
                     weight_vector[term] = weight
             weight_vectors.append(weight_vector)
+            print(weight_vectors)
 
      # construct posting lists
         for i in range(len(weight_vectors)):
@@ -96,3 +97,4 @@ class YoutubeSearchAlgorithm:
                     ans[document] += post[1] * query_weight[term]
         ans = sorted(ans, key=ans.get, reverse=True)
         return ans
+    print(weight_vectors)
