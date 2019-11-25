@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 from flask import request
 from Search  import *
-from SearchApps.py import * 
+from SearchApps import * 
 
 app = Flask(__name__)
 
@@ -29,8 +29,8 @@ def search():
     l = len(result)
     for i in range(l):
         documents.append(result[i])
-    title = list(test.vidInfo['title'][documents])
-    description = list(test.vidInfo['description'][documents])
+    title = list(test.vidInfo['track_name'][documents])
+    description = list(test.vidInfo['app_desc'][documents])
     tf =[]
     idf = []
 

@@ -59,7 +59,7 @@ class AppSearch:
 
                     weight_vector[term] = weight
             weight_vectors.append(weight_vector)
-            print(weight_vectors)
+            #print(weight_vectors)
 
      # construct posting lists
         for i in range(len(weight_vectors)):
@@ -97,4 +97,4 @@ class AppSearch:
                     ans[document] += post[1] * query_weight[term]
         ans = sorted(ans, key=ans.get, reverse=True)
         return ans
-    print(weight_vectors)
+   # print(weight_vectors)
