@@ -32,7 +32,7 @@ class YoutubeSearchAlgorithm:
         tfi = self.tfi
         tf_IDF = self.tf_IDF
 
-        for i in range(165):
+        for i in range(200):
             tokens = tokenizer.tokenize(vidInfo['title'][i])
             tokens += tokenizer.tokenize(vidInfo['description'][i])
 
