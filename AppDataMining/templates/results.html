@@ -1,0 +1,53 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<style>
+        body { background-color:rgb(255, 255, 255); }
+        .highlightme { background-color:#FFFF00; }
+        p { background-color:#FFFFFF; }
+</style>
+<div class ="jumbotron text-center">
+    <h1>Search Results for '{{userQuery}}'</h1>
+    <p class="lead">  </p>
+</div>
+<body>
+<form class="form-inline my-2 my-lg-0">
+
+</form>
+{% for i in range(result| length) %}
+
+<h1>{{title[i]}}</h1>
+<p>{{description[i]}}</p>
+<table>
+    <tr>
+       <h3> TF : {{tf[i]}}</h3>
+        <h3>IDF : {{idf[i]}}</h3>
+    </tr>
+</table>
+
+{% endfor %}
+<span class="highlightme">{{userQuery}}</span>
+<script>
+    query_terms = '{{userQuery}}'.split(' ');
+    var l = '{{l}}'  
+  
+    terms = '{{userQuery}}'.split(' ');
+    //document.write(l)
+    if (l == 0)
+    {
+        document.write(' There are no results')
+    }
+    for (i =0 ; i < l.length; i++){
+    ans = '{{title}}'
+    //document.write(ans)
+    //document.write(query_terms)
+    text = text.replace(new RegExp('([^a-zA-Z])('+query_terms+')([^a-zA-Z])','gi'), '<mark> </mark>å]');
+    }  
+   
+
+    
+    
+
+</script>
+</body>
+{% endblock %}

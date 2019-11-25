@@ -1,0 +1,20 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<div class ="jumbotron text-center">
+    <h1>Welcome to The Youtube Search Web App</h1>
+    <p class="lead"> Enter a Query to search for a video </p>
+</div>
+<body>
+<form class="form-inline my-2 my-lg-0">
+
+</form>
+<form action= " " method = "POST">
+    <label> Enter Query </label>
+    <input type="text" name ="Search" value={{request.form.Search}}>
+
+    <button type = "submit">Submit</button>
+
+</form>
+</body>
+{% endblock %}
