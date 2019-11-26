@@ -6,7 +6,6 @@ from SearchApps import *
 app = Flask(__name__)
 
 result = []
-yes = YoutubeSearchAlgorithm()
 test = AppSearch()
 
 @app.route('/')
@@ -22,9 +21,6 @@ def search():
     result = test.search(userQuery)
 
     terms = userQuery.split()
-
-
-
 
     l = len(result)
     for i in range(l):
