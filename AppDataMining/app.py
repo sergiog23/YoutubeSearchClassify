@@ -44,6 +44,7 @@ def search():
 @app.route('/', methods=['POST'])
 def classify():
     userQuery = request.form.get('classify')
+    print(userQuery)
     categories = []
     percentage = []
     classification = classs.classify(classify) 
