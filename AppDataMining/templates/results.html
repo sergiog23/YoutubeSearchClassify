@@ -28,25 +28,6 @@
 
 {% endfor %}
 <span class="highlightme">{{userQuery}}</span>
-<script>
-    query_terms = '{{userQuery}}'.split(' ');
-    var l = '{{l}}'  
-  
-    terms = '{{userQuery}}'.split(' ');
-    //document.write(l)
-    if (l == 0)
-    {
-        document.write(' There are no results')
-    }
-    for (i =0 ; i < l.length; i++){
-    ans = '{{title}}'
-    //document.write(ans)
-    //document.write(query_terms)
-    text = text.replace(new RegExp('([^a-zA-Z])('+query_terms+')([^a-zA-Z])','gi'), '<mark> </mark>å]');
-    }  
-    
-    
 
-</script>
 </body>
 {% endblock %}

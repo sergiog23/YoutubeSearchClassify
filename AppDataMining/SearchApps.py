@@ -32,7 +32,7 @@ class AppSearch:
         tfi = self.tfi
         tf_IDF = self.tf_IDF
 
-        for i in range(165):
+        for i in range(10):
             tokens = tokenizer.tokenize(vidInfo['track_name'][i])
             tokens += tokenizer.tokenize(vidInfo['app_desc'][i])
 
@@ -59,7 +59,6 @@ class AppSearch:
 
                     weight_vector[term] = weight
             weight_vectors.append(weight_vector)
-            #print(weight_vectors)
 
      # construct posting lists
         for i in range(len(weight_vectors)):
@@ -97,4 +96,3 @@ class AppSearch:
                     ans[document] += post[1] * query_weight[term]
         ans = sorted(ans, key=ans.get, reverse=True)
         return ans
-   # print(weight_vectors)

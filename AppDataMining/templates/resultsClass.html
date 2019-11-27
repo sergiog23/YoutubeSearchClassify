@@ -7,40 +7,20 @@
         p { background-color:#FFFFFF; }
 </style>
 <div class ="jumbotron text-center">
-    <h1>Classifier for '{{userQuery}}'</h1>
+    <h1>Classifier for '{{classifyQuery}}'</h1>
     <p class="lead">  </p>
 </div>
 <body>
 <form class="form-inline my-2 my-lg-0">
 
 </form>
-{% for i in range(4) %}
-{% if percentage[i] > 0%}
+<!-- <{% for i in range(4) %}-->
+<!--{% if percentage[i] > 0%}-->
 
-<h1>{{title[i]}}</h1>
+<!--<h1>{{title[i]}}</h1>-->
 
 
-{% endfor %}
-<span class="highlightme">{{userQuery}}</span>
-<script>
-    query_terms = '{{userQuery}}'.split(' ');
-    var l = '{{l}}'  
-  
-    terms = '{{userQuery}}'.split(' ');
-    //document.write(l)
-    if (l == 0)
-    {
-        document.write(' There are no results')
-    }
-    for (i =0 ; i < l.length; i++){
-    ans = '{{title}}'
-    //document.write(ans)
-    //document.write(query_terms)
-    text = text.replace(new RegExp('([^a-zA-Z])('+query_terms+')([^a-zA-Z])','gi'), '<mark> </mark>å]');
-    }  
-    
-    
+<!--{% endfor %}-->
 
-</script>
 </body>
 {% endblock %}

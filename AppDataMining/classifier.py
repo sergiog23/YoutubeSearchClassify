@@ -49,7 +49,7 @@ class AppClassifer:
 		prior = self.prior
 		condprob = self.condprob
 
-		for i in range(1000):
+		for i in range(10):
 			tokens = tokenizer.tokenize(vidInfo['track_name'][i])
 			#tokens += tokenizer.tokenize(vidInfo['prime_genre'][i]
 			# Remove stop words
@@ -107,32 +107,6 @@ class AppClassifer:
 				Tct = text_in_c.count(term)
 				condprob[term][c] = (Tct + 1)/(len(text_in_c) + total_term)
 
-	def search(self, query):
-		q = self.tokenizer.tokenize(query)
-		tokens = []
-		query_weight = {}
-		for t in q:
-			t = t.lower()
-			if t not in self.stops:
-				t = self.stemmer.stem(t) 
-				tokens.append(t)
-
-		for term in tokens:
-			if term not in query_weight:
-				tf = tokens.count(term) / len(tokens)
-				query_weight[term] = tf
-
-		sim = {}
-		for term in query_weight:
-			if term in self.posting_lists:
-				for post in self.posting_lists[term]:
-					document = post[0]
-					if document not in sim:
-						sim[document] = 0
-					sim[document] += post[1] * query_weight[term]
-		sim = sorted(sim, key=sim.get, reverse=True)
-		print(sim)
-		return sim 
 
 	def classify(self, query):
 		query_vocab = []
