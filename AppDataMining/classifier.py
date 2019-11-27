@@ -49,11 +49,9 @@ class AppClassifer:
 		prior = self.prior
 		condprob = self.condprob
 
-		for i in range(165):
+		for i in range(1000):
 			tokens = tokenizer.tokenize(vidInfo['track_name'][i])
-			#tokens += tokenizer.tokenize(vidInfo['prime_genre'][i])
-		
-
+			#tokens += tokenizer.tokenize(vidInfo['prime_genre'][i]
 			# Remove stop words
 			final_tokens = []
 			for token in tokens: 
@@ -157,4 +155,5 @@ class AppClassifer:
 		classification = {}
 		for c in sorted(score, key=score.get, reverse=True):
 			classification[c]= score[c]/float(total_score)
+		print(classification)
 		return classification

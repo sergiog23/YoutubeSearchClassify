@@ -48,10 +48,12 @@ def classify():
     categories = []
     percentage = []
     classification = classs.classify(classify) 
-    for c in classification:
-        categories.append(c)
-        percentage.append(round(classification[c]*100,2))
-    return render_template('resultsClass.html',data=classs.vidInfo,userQuery=userQuery,categories=categories,percentage=percentage,classification=classification,search=False)
+    #for c in classification:
+     #   categories.append(c)
+      #  percentage.append(round(classification[c]*100,2))
+    
+    return render_template('resultsClass.html',data=classs.vidInfo,userQuery=userQuery,classification=classification,search=False,classify=True)
+    #return render_template('resultsClass.html',data=classs.vidInfo,userQuery=userQuery,categories=categories,percentage=percentage,classification=classification,search=False,classify=True)
 
 
 
