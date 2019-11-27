@@ -7,23 +7,18 @@
         p { background-color:#FFFFFF; }
 </style>
 <div class ="jumbotron text-center">
-    <h1>Search Results for '{{userQuery}}'</h1>
+    <h1>Classifier for '{{userQuery}}'</h1>
     <p class="lead">  </p>
 </div>
 <body>
 <form class="form-inline my-2 my-lg-0">
 
 </form>
-{% for i in range(result| length) %}
+{% for i in range(4) %}
+{% if percentage[i] > 0%}
 
 <h1>{{title[i]}}</h1>
-<p>{{description[i]}}</p>
-<table>
-    <tr>
-       <h3> TF : {{tf[i]}}</h3>
-        <h3>IDF : {{idf[i]}}</h3>
-    </tr>
-</table>
+
 
 {% endfor %}
 <span class="highlightme">{{userQuery}}</span>
