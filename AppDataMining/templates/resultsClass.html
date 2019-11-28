@@ -14,7 +14,13 @@
 <form class="form-inline my-2 my-lg-0">
 
 </form>
-
+{% for i in range(10) %}
+{% if percentage[i] > 0%}
+{{categories[i]}}
+{{percentage[i]}}
+<br>
+{% endif %}
+{% endfor %}
 
 </body>
 {% endblock %}
