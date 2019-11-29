@@ -54,9 +54,8 @@ class AppClassifer:
         condprob = self.condprob
 
         for i in range(100):
-
-        if vidInfo['prime_genre'] != 'Games':
-            tokens = tokenizer.tokenize(vidInfo['track_name'][i])
+            if vidInfo['prime_genre'] != 'Games':
+                tokens = tokenizer.tokenize(vidInfo['track_name'][i])
             # tokens += tokenizer.tokenize(vidInfo['prime_genre'][i]
             # Remove stop words
             final_tokens = []
