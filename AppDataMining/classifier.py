@@ -6,6 +6,7 @@ from nltk.tokenize import RegexpTokenizer
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 from collections import defaultdict
+from SearchApps import *
 
 def count_document(document, c):
 	document_in_c = 0
@@ -49,8 +50,10 @@ class AppClassifer:
 		prior = self.prior
 		condprob = self.condprob
 
-		for i in range(10):
-			tokens = tokenizer.tokenize(vidInfo['track_name'][i])
+		for i in range(100):
+    			
+    		if vidInfo['prime_genre'] != 'Games':
+    			tokens = tokenizer.tokenize(vidInfo['track_name'][i])
 			#tokens += tokenizer.tokenize(vidInfo['prime_genre'][i]
 			# Remove stop words
 			final_tokens = []
@@ -92,7 +95,7 @@ class AppClassifer:
 		ratings = vidInfo['prime_genre']
 
 		for rating in ratings:
-			if rating not in categories:
+			if rating not in categories and rating != 'Games':
 				categories.append(rating)
 
 		for c in categories:
