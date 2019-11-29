@@ -27,7 +27,7 @@ def concatenate_text(categories, document, c):
 
 class AppClassifer:
     # Needed attributes
-    vidInfo = pd.read_csv('AppleStore.csv')
+    vidInfo = pd.read_csv('apps.csv')
     tokenizer = RegexpTokenizer(r'[a-zA-Z]+')
     stops = stopwords.words('english')
     stemmer = PorterStemmer()
@@ -59,7 +59,8 @@ class AppClassifer:
     			continue
 			
             tokens = tokenizer.tokenize(vidInfo['track_name'][i])
-            # tokens += tokenizer.tokenize(vidInfo['prime_genre'][i]
+			tokens += tokenizer.tokenize(vidInfo['app_desc'][i])
+            tokens += tokenizer.tokenize(vidInfo['prime_genre'][i]
             # Remove stop words
             final_tokens = []
             for token in tokens:
