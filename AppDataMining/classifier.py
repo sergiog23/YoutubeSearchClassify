@@ -39,6 +39,7 @@ class AppClassifer:
     categories = []
     prior = {}
     condprob = defaultdict(dict)
+    counts = []
 
     def __init__(self):
         vidInfo = self.vidInfo
@@ -52,6 +53,7 @@ class AppClassifer:
         categories = self.categories
         prior = self.prior
         condprob = self.condprob
+        counts = self.counts
         
     
 
@@ -107,10 +109,12 @@ class AppClassifer:
             prior[c] = document_in_c/float(total_document)
             # Concatenate all the text of class c in one list
             text_in_c = concatenate_text(ratings, final_document, c)
+            
 
             for term in vocabulary:
                 # Count how many term t are in class c
                 Tct = text_in_c.count(term)
+                counts.append(Tct)
                 condprob[term][c] = (Tct + 1)/(len(text_in_c) + total_term)
 
     def classify(self, query):
@@ -128,6 +132,7 @@ class AppClassifer:
             for term in query_vocab:
                 if term in self.condprob:
                     score[c] *= self.condprob[term][c]
+                    
 
         total_score = sum(score.values())
         classification = {}

@@ -45,12 +45,12 @@ def Compute():
         percentage = []
         priors = []
         classification = classs.classify(classifyQuery) 
-        for i in classification:
-            testing = classs.prior[i]
-            priors.append(testing)
+        testing = classs.counts
+        priors.append(testing)
         for c in classification:
             categories.append(c)
             percentage.append(round((classification[c]*100),2))
+            
         return render_template('resultsClass.html',data=classs.vidInfo,classifyQuery=classifyQuery,categories=categories,percentage=percentage,classification=classification,search=False,classify=True,priors=priors)
 
 

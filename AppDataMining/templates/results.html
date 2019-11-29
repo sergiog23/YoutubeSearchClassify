@@ -2,6 +2,11 @@
 
 {% block body %}
 <style>
+    mark{
+background: yellow;
+}
+</style>
+<style>
         body { background-color:rgb(255, 255, 255); }
         .highlightme { background-color:#FFFF00; }
         p { background-color:#FFFFFF; }
@@ -29,5 +34,17 @@
 {% endfor %}
 <span class="highlightme">{{userQuery}}</span>
 
-</body>
+
 {% endblock %}
+<script src="static/js/nouislider.min.js"></script>
+<script src="static/js/moment-with-locales.min.js"></script>
+<script src="static/js/bootstrap-datetimepicker.min.js"></script>
+<script src="static/js/main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.js"></script>
+<script>
+        var instance = new Mark(document.querySelector(".context"));
+        instance.mark("{{userQuery}}",{"accuracy":"partially"});
+        
+    
+</script>
+</body>
