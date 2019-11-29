@@ -58,9 +58,6 @@ class AppClassifer:
         for i in range(100):
             tokens = tokenizer.tokenize(vidInfo['track_name'][i])
             tokens += tokenizer.tokenize(vidInfo['app_desc'][i])
-
-            # tokens += tokenizer.tokenize(vidInfo['prime_genre'][i]
-            # Remove stop words
             final_tokens = []
             for token in tokens:
                 token = token.lower()

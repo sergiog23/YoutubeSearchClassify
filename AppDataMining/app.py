@@ -22,7 +22,6 @@ def Compute():
     if(searchQuery!= None):
 
         result = test.search(searchQuery)
-        terms = searchQuery.split()
         l = len(result)
         for i in range(l):
             documents.append(result[i])
@@ -44,11 +43,15 @@ def Compute():
         print(classifyQuery)
         categories = []
         percentage = []
+        priors = []
         classification = classs.classify(classifyQuery) 
+        for i in classification:
+            testing = classs.prior[i]
+            priors.append(testing)
         for c in classification:
             categories.append(c)
             percentage.append(round((classification[c]*100),2))
-        return render_template('resultsClass.html',data=classs.vidInfo,classifyQuery=classifyQuery,categories=categories,percentage=percentage,classification=classification,search=False,classify=True)
+        return render_template('resultsClass.html',data=classs.vidInfo,classifyQuery=classifyQuery,categories=categories,percentage=percentage,classification=classification,search=False,classify=True,priors=priors)
 
 
 
