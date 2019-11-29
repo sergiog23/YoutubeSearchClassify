@@ -52,9 +52,10 @@ class AppClassifer:
         categories = self.categories
         prior = self.prior
         condprob = self.condprob
-
+		test = vidInfo['prime_genre']
+		
         for i in range(100):
-            if vidInfo['prime_genre'] != 'Games':
+            if test != 'Games':
                 tokens = tokenizer.tokenize(vidInfo['track_name'][i])
             # tokens += tokenizer.tokenize(vidInfo['prime_genre'][i]
             # Remove stop words
