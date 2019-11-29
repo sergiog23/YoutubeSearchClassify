@@ -7,14 +7,15 @@
         p { background-color:#FFFFFF; }
 </style>
 <div class ="jumbotron text-center">
-    <h1>Classifier for '{{classifyQuery}}'</h1>
+    <h1>Results for '{{classifyQuery}}'</h1>
     <p class="lead">  </p>
 </div>
 <body>
 <form class="form-inline my-2 my-lg-0">
 
 </form>
-{% for i in range(10) %}
+<h1>Top 4 Categories:</h1>
+{% for i in range(4) %}
 {% if percentage[i] > 0%}
 {{categories[i]}}
 {{percentage[i]}}

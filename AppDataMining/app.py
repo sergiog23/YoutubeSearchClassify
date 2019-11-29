@@ -47,7 +47,7 @@ def Compute():
         classification = classs.classify(classifyQuery) 
         for c in classification:
             categories.append(c)
-            percentage.append(round(classification[c]*100,2))
+            percentage.append(round((classification[c]*100),2))
         return render_template('resultsClass.html',data=classs.vidInfo,classifyQuery=classifyQuery,categories=categories,percentage=percentage,classification=classification,search=False,classify=True)
 
 
