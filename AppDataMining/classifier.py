@@ -56,9 +56,6 @@ class AppClassifer:
     
 
         for i in range(1000):
-            if test[i] == 'Games':
-                continue
-         
             tokens = tokenizer.tokenize(vidInfo['track_name'][i])
 
             # tokens += tokenizer.tokenize(vidInfo['prime_genre'][i]
