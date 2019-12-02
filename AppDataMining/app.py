@@ -19,7 +19,7 @@ def index():
 def Compute():
     documents = []
     searchQuery = request.form.get('Search')
-    if(searchQuery!= None):
+    if(searchQuery is not None):
 
         result = searchObj.search(searchQuery)
         l = len(result)
@@ -39,14 +39,14 @@ def Compute():
         return render_template('results.html', data=searchObj.vidInfo,userQuery=searchQuery, result=documents, title=title, description=description,l=l,tf=tf,idf=idf, search=True,classify = False)
 
     classifyQuery = request.form.get('Classify')
-    if(classifyQuery != None):
+    if(classifyQuery is not None):
         print(classifyQuery)
         categories = []
         percentage = []
         priors = []
         classification = classifyObj.classify(classifyQuery) 
-        searchObjing = classifyObj.counts
-        priors.append(searchObjing)
+        classCounts = classifyObj.counts
+        priors.append(classCounts)
         for c in classification:
             categories.append(c)
             percentage.append(round((classification[c]*100),2))
