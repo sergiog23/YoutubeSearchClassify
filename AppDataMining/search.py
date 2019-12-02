@@ -8,7 +8,6 @@ import numpy
 
 
 class AppSearch:
-
     vidInfo = pd.read_csv('apps.csv')
     tokenizer = RegexpTokenizer(r'[a-zA-Z]+')
     stops = stopwords.words('english')
