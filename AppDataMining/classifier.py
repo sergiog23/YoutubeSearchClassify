@@ -6,7 +6,7 @@ from nltk.tokenize import RegexpTokenizer
 from nltk.corpus import stopwords
 from nltk.stem.porter import PorterStemmer
 from collections import defaultdict
-from SearchApps import *
+from search import *
 
 
 def count_document(document, c):
@@ -54,10 +54,8 @@ class AppClassifer:
         prior = self.prior
         condprob = self.condprob
         counts = self.counts
-        
-    
 
-        for i in range(200):
+        for i in range(300):
             tokens = tokenizer.tokenize(vidInfo['track_name'][i])
             tokens += tokenizer.tokenize(vidInfo['app_desc'][i])
             final_tokens = []
