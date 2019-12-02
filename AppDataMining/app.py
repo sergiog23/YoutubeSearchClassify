@@ -6,38 +6,42 @@ from SearchApps import *
 app = Flask(__name__)
 
 result = []
-SearchObj = YoutubeSearchAlgorithm()
-ClassifyObj = AppSearch()
+yes = YoutubeSearchAlgorithm()
+test = AppSearch()
 
 @app.route('/')
 def index():
-    return render_template('home.html', data=SearchObj.vidInfo, result=result, search=False)
+    return render_template('home.html', data=yes.vidInfo, result=result, search=False)
 
 
 @app.route('/', methods=['POST'])
 def search():
-    ClassifyObjing = []
+    testing = []
     documents = []
     userQuery = request.form.get('Search')
-    result = ClassifyObj.search(userQuery)
+    result = test.search(userQuery)
 
     terms = userQuery.split()
+
+
+
+
     l = len(result)
     for i in range(l):
         documents.append(result[i])
-    title = list(ClassifyObj.vidInfo['track_name'][documents])
-    description = list(ClassifyObj.vidInfo['app_desc'][documents])
+    title = list(test.vidInfo['track_name'][documents])
+    description = list(test.vidInfo['app_desc'][documents])
     tf =[]
     idf = []
 
     for i in documents:
-        tfs = SearchObj.tfi[i]
+        tfs = yes.tfi[i]
         tf.append(tfs)
     for i in documents:
-        ids = SearchObj.tf_IDF[i]
+        ids = yes.tf_IDF[i]
         idf.append(ids)
 
-    return render_template('results.html', data=SearchObj.vidInfo,userQuery=userQuery, result=documents, title=title, description=description,l=l,tf=tf,idf=idf, search=True)
+    return render_template('results.html', data=yes.vidInfo,userQuery=userQuery, result=documents, title=title, description=description,l=l,tf=tf,idf=idf, search=True)
 
 
 if (__name__ == '__main__'):

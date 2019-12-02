@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+<style>
+        body { background-color:rgb(255, 255, 255); }
+        .highlightme { background-color:#FFFF00; }
+        p { background-color:#FFFFFF; }
+</style>
+  <style>
+    mark{
+background: yellow;
+}
+</style>
+<div class ="jumbotron text-center">
+    <h1>Results for '{{classifyQuery}}'</h1>
+    <p class="lead">  </p>
+</div>
+<body>
+<form class="form-inline my-2 my-lg-0">
+
+</form>
+<h1>Top 4 Categories:</h1>
+{% for i in range(4) %}
+{% if percentage[i] > 0%}
+<p>{{categories[i]}} : {{percentage[i]}} %</p>
+{% endif %}
+{% endfor %}
+
+</body>
+{% endblock %}
+<script>
+    var instance = new Mark(document.querySelector(".context"));
+
+</script>

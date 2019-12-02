@@ -2,6 +2,11 @@
 
 {% block body %}
 <style>
+    mark{
+background: yellow;
+}
+</style>
+<style>
         body { background-color:rgb(255, 255, 255); }
         .highlightme { background-color:#FFFF00; }
         p { background-color:#FFFFFF; }
@@ -20,6 +25,7 @@
 <p>{{description[i]}}</p>
 <table>
     <tr>
+        <h2>Calculations Steps:</h2>
        <h3> TF : {{tf[i]}}</h3>
         <h3>IDF : {{idf[i]}}</h3>
     </tr>
@@ -27,27 +33,16 @@
 
 {% endfor %}
 <span class="highlightme">{{userQuery}}</span>
+
+
+{% endblock %}
+<script src="static/js/nouislider.min.js"></script>
+<script src="static/js/moment-with-locales.min.js"></script>
+<script src="static/js/bootstrap-datetimepicker.min.js"></script>
+<script src="static/js/main.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.js"></script>
 <script>
-    query_terms = '{{userQuery}}'.split(' ');
-    var l = '{{l}}'  
-  
-    terms = '{{userQuery}}'.split(' ');
-    //document.write(l)
-    if (l == 0)
-    {
-        document.write(' There are no results')
-    }
-    for (i =0 ; i < l.length; i++){
-    ans = '{{title}}'
-    //document.write(ans)
-    //document.write(query_terms)
-    text = text.replace(new RegExp('([^a-zA-Z])('+query_terms+')([^a-zA-Z])','gi'), '<mark> </mark>å]');
-    }  
-   
-
-    
-    
-
+        var instance = new Mark(document.querySelector(".context"));
+        instance.mark("{{userQuery}}",{"accuracy":"partially"});
 </script>
 </body>
-{% endblock %}
