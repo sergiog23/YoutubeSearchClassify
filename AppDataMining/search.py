@@ -6,7 +6,7 @@ import math
 import pandas as pd
 import numpy
 
-
+#Define App Search class that will have the preprocessing of data and Search feature
 class AppSearch:
     vidInfo = pd.read_csv('apps.csv')
     tokenizer = RegexpTokenizer(r'[a-zA-Z]+')
@@ -31,10 +31,9 @@ class AppSearch:
         tfi = self.tfi
         tf_IDF = self.tf_IDF
 
-        for i in range(10):
+        for i in range(200):
             tokens = tokenizer.tokenize(vidInfo['track_name'][i])
             tokens += tokenizer.tokenize(vidInfo['app_desc'][i])
-
             final_tokens = []
             for token in tokens:
                 token = token.lower()
@@ -59,7 +58,6 @@ class AppSearch:
                     weight_vector[term] = weight
             weight_vectors.append(weight_vector)
 
-     # construct posting lists
         for i in range(len(weight_vectors)):
             document = weight_vectors[i]
             for token in document:

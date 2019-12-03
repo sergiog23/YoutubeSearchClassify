@@ -8,35 +8,37 @@ from nltk.stem.porter import PorterStemmer
 from collections import defaultdict
 from search import *
 
-
-def count_document(document, c):
+#Function to concatenate text 
+def link_text(categories, document, c):
+    txt = []
+    for i in range(len(document)):
+        if c in categories[i]:
+            txt.extend(document[i])
+    return txt
+# function to count the number of occurences in document 
+def doc_count(document, c):
     document_in_c = 0
     for doc in document:
         if c in doc:
             document_in_c += 1
     return document_in_c
-
-
-def concatenate_text(categories, document, c):
-    text_in_c = []
-    for i in range(len(document)):
-        if c in categories[i]:
-            text_in_c.extend(document[i])
-    return text_in_c
-
-
+    
 class AppClassifer:
-    # Needed attributes
+    #Use pandas libary to read CSV file
     vidInfo = pd.read_csv('apps.csv')
+    #Use nltk library to tokenize free text file to only include words only no special characters
     tokenizer = RegexpTokenizer(r'[a-zA-Z]+')
+    # Use nltk stop words to remove common words like 'the' 'to' 'so'
     stops = stopwords.words('english')
+    # use porter stemmer to reduce a word to its word stem
     stemmer = PorterStemmer()
-    total_words = []
+    # create a list where we will the store the final document after it has been preprocessed
     final_document = []
-    weight_vectors = []
-    posting_lists = {}
+    # create a dictionary of words that are found after processing
     vocabulary = []
+    # create a list of all categories present in the app.csv that will serve as a Ground truth in classifier
     categories = []
+    # create a dictionary that contains the prior probability 
     prior = {}
     condprob = defaultdict(dict)
     counts = []
@@ -47,15 +49,13 @@ class AppClassifer:
         stops = self.stops
         stemmer = self.stemmer
         final_document = self.final_document
-        weight_vectors = self.weight_vectors
-        posting_lists = self.posting_lists
         vocabulary = self.vocabulary
         categories = self.categories
         prior = self.prior
         condprob = self.condprob
         counts = self.counts
 
-        for i in range(300):
+        for i in range(200):
             tokens = tokenizer.tokenize(vidInfo['track_name'][i])
             tokens += tokenizer.tokenize(vidInfo['app_desc'][i])
             final_tokens = []
@@ -68,33 +68,9 @@ class AppClassifer:
                         vocabulary.append(token)
             final_document.append(final_tokens)
 
-        for document in final_document:
-            weight_vector = {}
-            for term in document:
-                if term not in weight_vector:
-                    tf = document.count(term)/len(document)
-                    df = sum(1 for document in final_document if term in document)
-                    n = len(final_document)
-                    weight = tf * math.log(n/df)
-                    weight_vector[term] = weight
-
-            weight_vectors.append(weight_vector)
-
-     # construct posting lists
-        for i in range(len(weight_vectors)):
-            document = weight_vectors[i]
-            for token in document:
-                if token not in posting_lists:
-                    posting_lists[token] = []
-                posting_lists[token].append([i, document[token]])
-                posting_lists[token] = sorted(
-                    posting_lists[token], key=lambda x: x[1], reverse=True)
-
-        # construct conditional prob. for naive bayes
         total_document = len(final_document)
-
         total_term = len(vocabulary)
-
+        # get the category for each row in processed document 
         ratings = vidInfo['prime_genre']
 
         for rating in ratings:
@@ -102,19 +78,16 @@ class AppClassifer:
                 categories.append(rating)
 
         for c in categories:
-            # Count how many documents are in class c
-            document_in_c = count_document(ratings, c)
+            document_in_c = doc_count(ratings, c)
             prior[c] = document_in_c/float(total_document)
-            # Concatenate all the text of class c in one list
-            text_in_c = concatenate_text(ratings, final_document, c)
-            
+            text_in_c = link_text(ratings, final_document, c)
 
             for term in vocabulary:
-                # Count how many term t are in class c
                 Tct = text_in_c.count(term)
                 counts.append(Tct)
                 condprob[term][c] = (Tct + 1)/(len(text_in_c) + total_term)
-
+    # I will Call this function from the app.py and it will process the users query 
+    #Similar to what this class does to the data by tokenizeing it and removing stop words and stemming
     def classify(self, query):
         query_vocab = []
         terms = self.tokenizer.tokenize(query)
@@ -130,11 +103,9 @@ class AppClassifer:
             for term in query_vocab:
                 if term in self.condprob:
                     score[c] *= self.condprob[term][c]
-                    
-
+                
         total_score = sum(score.values())
         classification = {}
         for c in sorted(score, key=score.get, reverse=True):
             classification[c] = score[c]/float(total_score)
-        print(classification)
         return classification
