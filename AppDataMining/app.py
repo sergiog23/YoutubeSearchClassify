@@ -17,7 +17,7 @@ def index():
     return render_template('home.html',data=searchObj.vidInfo,result=result, search=False,classify=False,Image=False)
 
 
-@app.route('/', methods=['POST'])
+@app.route('/', methods=['POST','GET'])
 def Compute():
     documents = []
     searchQuery = request.form.get('Search')
@@ -64,6 +64,10 @@ def Compute():
         for i in range(l):
             documentsImage.append(result[i])
         caption = list(imageObj.imageInfo['caption'][documentsImage])
+        url = list(imageObj.imageInfo['url'][documentsImage])
+
+        def path(path):
+            return '<img src="'+path + '" width = "100">'
     
         tf =[]
         idf = []
@@ -73,10 +77,7 @@ def Compute():
             tf.append(tfs)
             ids = imageObj.tf_IDF[i]
             idf.append(ids)
-        return render_template('imageResults.html', data=imageObj.imageInfo,userQuery=ImageQuery, result=documentsImage,caption=caption,l=l,tf=tf,idf=idf, search=False,classify = False,Image=True)
-
-
-
+        return render_template('imageResults.html', data=imageObj.imageInfo,userQuery=ImageQuery,url=url, result=documentsImage,caption=caption,l=l,tf=tf,idf=idf,Image=True,image=path)
 
 
 if (__name__ == '__main__'):
