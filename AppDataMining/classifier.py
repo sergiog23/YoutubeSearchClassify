@@ -8,7 +8,7 @@ from nltk.stem.porter import PorterStemmer
 from collections import defaultdict
 from search import *
 
-#Function to concatenate text 
+#Function to concatenate text
 def link_text(categories, document, c):
     txt = []
     for i in range(len(document)):
