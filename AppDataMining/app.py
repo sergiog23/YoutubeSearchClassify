@@ -16,7 +16,6 @@ imageObj = Image()
 def index():
     return render_template('home.html',data=searchObj.vidInfo,result=result, search=False,classify=False,Image=False)
 
-
 @app.route('/', methods=['POST','GET'])
 def Compute():
     documents = []
@@ -52,9 +51,8 @@ def Compute():
         for c in classification:
             categories.append(c)
             percentage.append(round((classification[c]*100),2))
-            
         return render_template('resultsClass.html',data=classifyObj.vidInfo,classifyQuery=classifyQuery,categories=categories,percentage=percentage,classification=classification,search=False,classify=True,priors=priors)
-
+    # image captionning part 
     ImageQuery = request.form.get('Image')
     if( ImageQuery is not None):
         documentsImage = []
@@ -65,10 +63,6 @@ def Compute():
             documentsImage.append(result[i])
         caption = list(imageObj.imageInfo['caption'][documentsImage])
         url = list(imageObj.imageInfo['url'][documentsImage])
-
-        def path(path):
-            return '<img src="'+path + '" width = "100">'
-    
         tf =[]
         idf = []
 
