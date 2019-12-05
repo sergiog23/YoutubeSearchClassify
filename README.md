@@ -20,8 +20,8 @@ To download this project and run on local machine:
 4.cd into AppDataMining\
 5.run python3 app.py \
 6.This will run an give you a link to the webapp \
-7.Ctrl-c on the link to open web app.
-**http://127.0.0.1:5000/**
+7.Ctrl-c on the link to open web app.\
+**http://127.0.0.1:5000/**\
 Note: You will need to have have some python libraries in order for you to run:\
 NLTK, pandas,numpy,flask
 
@@ -29,5 +29,5 @@ Files:\
 **Search.py**: In this file we declare the class AppDataMining where I implement Tf-idf and perform Search.\
 **Classifier.py**: In this file I implement the Naive Bayes classifer\
 **app.py**:In this file serves as the entry point to the web application we get the user's query and score it against the tf-idf scores.\
-**ImageCaptioner.py** In this file we declare the Image class where I perfrom Search over the trained image data set that contains captioned images\
+**ImageCaptioner.py** In this file we declare the Image class where I perfrom Search over the trained image data set that contains captioned images
 
