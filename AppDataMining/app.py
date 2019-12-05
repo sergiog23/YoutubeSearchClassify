@@ -2,6 +2,7 @@ from flask import Flask, render_template
 from flask import request
 from search  import *
 from classifier import *
+from ImageCaptioning import *
 
 
 app = Flask(__name__)
@@ -9,10 +10,11 @@ app = Flask(__name__)
 result = []
 searchObj = AppSearch()
 classifyObj = AppClassifer()
+imageObj = Image()
 
 @app.route('/')
 def index():
-    return render_template('home.html',data=searchObj.vidInfo,result=result, search=False,classify=False)
+    return render_template('home.html',data=searchObj.vidInfo,result=result, search=False,classify=False,Image=False)
 
 
 @app.route('/', methods=['POST'])
@@ -52,6 +54,28 @@ def Compute():
             percentage.append(round((classification[c]*100),2))
             
         return render_template('resultsClass.html',data=classifyObj.vidInfo,classifyQuery=classifyQuery,categories=categories,percentage=percentage,classification=classification,search=False,classify=True,priors=priors)
+
+    ImageQuery = request.form.get('Image')
+    if( ImageQuery is not None):
+        documentsImage = []
+        print(ImageQuery)
+        result = imageObj.search(ImageQuery)
+        l = len(result)
+        for i in range(l):
+            documentsImage.append(result[i])
+        caption = list(imageObj.imageInfo['caption'][documentsImage])
+    
+        tf =[]
+        idf = []
+
+        for i in documentsImage:
+            tfs = imageObj.tfi[i]
+            tf.append(tfs)
+            ids = imageObj.tf_IDF[i]
+            idf.append(ids)
+        return render_template('imageResults.html', data=imageObj.imageInfo,userQuery=ImageQuery, result=documentsImage,caption=caption,l=l,tf=tf,idf=idf, search=False,classify = False,Image=True)
+
+
 
 
 

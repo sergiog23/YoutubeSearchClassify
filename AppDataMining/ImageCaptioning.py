@@ -94,8 +94,6 @@ class Image:
         ans = sorted(ans, key=ans.get, reverse=True)
         print(ans)
         return ans
-yes = Image()
-yes.search('soccer')
 
 
 
