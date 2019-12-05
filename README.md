@@ -28,6 +28,6 @@ NLTK, pandas,numpy,flask
 Files:\
 **Search.py**: In this file we declare the class AppDataMining where I implement Tf-idf and perform Search.\
 **Classifier.py**: In this file I implement the Naive Bayes classifer\
-**app.py**:In this file serves as the entry point to the web application we get the user's query and score it against the tf-idf scores.
+**app.py**:In this file serves as the entry point to the web application we get the user's query and score it against the tf-idf scores.\
 **ImageCaptioner.py** In this file we declare the Image class where I perfrom Search over the trained image data set that contains captioned images\
 
