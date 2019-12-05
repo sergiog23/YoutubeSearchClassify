@@ -1,7 +1,7 @@
 # AppDataMining
 Datamining Term Project  
 
-Link to project: [APP](http://sergioguerrero.pythonanywhere.com/)
+Link to project: [CLICK HERE FOR THE LIVE WEB APPLICATION](http://sergioguerrero.pythonanywhere.com/)
 # Phase I Search
 In this phase I implemented Search using Tf-idf to score and rank the rows in the document according to my query. 
 # Phase II Classifier
